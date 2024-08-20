@@ -9,11 +9,9 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
 import com.example.EmailOTP.Common.Constants;
+import com.example.EmailOTP.Models.OTPDetails;
 import com.example.EmailOTP.Services.IEmailService;
 import com.example.EmailOTP.Services.IOTPService;
-
-import Models.OTPDetails;
-
 import com.google.common.cache.LoadingCache;
 import com.google.common.cache.CacheBuilder;
 import com.google.common.cache.CacheLoader;
