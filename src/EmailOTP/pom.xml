@@ -29,18 +29,25 @@
 	<properties>
 		<java.version>17</java.version>
 	</properties>
+	<!-- this is a template message that we can pre-load with default state -->
+<bean id="templateMessage" class="org.springframework.mail.SimpleMailMessage">
+    <property name="from" value="achinirandeni1989@gmail.com"/>
+    <property name="subject" value="Your OTP"/>
+</bean>
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
-
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
-	
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-mail</artifactId>
+		</dependency>
    <dependency>
      <groupId>oro</groupId>
      <artifactId>oro</artifactId>

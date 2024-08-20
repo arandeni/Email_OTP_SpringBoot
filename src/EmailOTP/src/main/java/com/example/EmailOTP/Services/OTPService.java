@@ -5,6 +5,7 @@ import java.util.Random;
 @Service
 public class OTPService implements IOTPService
 {
+    //Generate OTP
     public String GenerateOTP()
     {
         Random random = new Random();

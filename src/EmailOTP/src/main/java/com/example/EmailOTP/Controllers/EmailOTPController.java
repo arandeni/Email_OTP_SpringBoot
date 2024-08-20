@@ -50,6 +50,7 @@ public class EmailOTPController
             });
     }
 
+    //Generate OTP and send it to the given user
     @RequestMapping(value ="/generate_OTP_email/{user_email}", method = RequestMethod.POST)
     public ResponseEntity<String> generate_OTP_email(@PathVariable String user_email)
     {
@@ -78,7 +79,7 @@ public class EmailOTPController
                 String email_body = "You OTP Code is " + otpCode + ". The code is valid for 1 minute";
 
                 //Send OTP code to the given email address
-                boolean isEmailSent = _emailService.SendEmail(user_email, email_body);
+                boolean isEmailSent = _emailService.SendEmail(user_email, "OTP", email_body);
                 if(isEmailSent)
                 {
                     return new ResponseEntity<>(Constants.STATUS_EMAIL_OK, HttpStatus.OK);
@@ -95,6 +96,7 @@ public class EmailOTPController
         }
     }
 
+    //Validate OTP
     @RequestMapping(value ="/check_OTP/{email}/{otp}", method = RequestMethod.POST)
     public ResponseEntity<String> check_OTP(@PathVariable String email, @PathVariable String otp)
     {
@@ -109,9 +111,9 @@ public class EmailOTPController
                 {
                     if(_otpDetails.getAttempts() < Constants.MAX_ATTEMPTS)
                     {
-                        if(_otpDetails.getOTP() == otp)
+                        if(_otpDetails.getOTP().equals(otp))
                         {
-                            return new ResponseEntity<>(Constants.STATUS_EMAIL_OK, HttpStatus.OK);
+                            return new ResponseEntity<>(Constants.STATUS_OTP_OK, HttpStatus.OK);
                         }
                         else
                         {
@@ -136,7 +138,6 @@ public class EmailOTPController
             {
                 return new ResponseEntity<>(Constants.STATUS_OTP_SESSION_EXPIRED, HttpStatus.INTERNAL_SERVER_ERROR);
             }
-            
         }
         catch(ExecutionException e)
         {
